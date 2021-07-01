@@ -6,7 +6,8 @@ import {FORMULARIO_PROYECTO,
         OBTENER_PROYECTOS,
         AGREGAR_PROYECTO,
         VALIDAR_FORMULARIO,
-        PROYECTO_ACTUAL} from '../../types';
+        PROYECTO_ACTUAL,
+        ELIMINAR_PROYECTO} from '../../types';
 
 
 
@@ -21,7 +22,8 @@ const ProyectoState=props=>{
     const initialState={
         proyectos:[],
         formulario:false,
-        errorformulario:false
+        errorformulario:false,
+        proyecto:null
     }
     //Dispatch para ejecutar las acciones
     const [state, dispatch] = useReducer(proyectoReducer, initialState);
@@ -56,6 +58,20 @@ const ProyectoState=props=>{
             type:VALIDAR_FORMULARIO
         })
     }
+    //Selecciona el proyecto q el usuario de click
+    const proyectoActual=proyectoId=>{
+        dispatch({
+            type:PROYECTO_ACTUAL,
+            payload:proyectoId
+        })
+    }
+    //Eliminar un proyecto
+    const eliminarProyecto=proyectoId=>{
+        dispatch({
+            type:ELIMINAR_PROYECTO,
+            payload:proyectoId
+        })
+    }
 
 
 
@@ -67,10 +83,13 @@ const ProyectoState=props=>{
                 proyectos: state.proyectos,
                 formulario: state.formulario,
                 errorformulario:state.errorformulario,
+                proyecto:state.proyecto,
                 mostrarFormulario,
                 obtenerProyectos,
                 agregarProyecto,
-                mostrarError
+                mostrarError,
+                proyectoActual,
+                eliminarProyecto
                 }}>
             {props.children}
         </proyectoContext.Provider>

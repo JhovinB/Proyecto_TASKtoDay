@@ -1,14 +1,14 @@
-import React from 'react';
-
 import {
     TAREAS_PROYECTO,
     AGREGAR_TAREA,
     VALIDAR_TAREA,
     ELIMINAR_TAREA,
     ESTADO_TAREA,
-    TAREA_ACTUAL} from '../../types';
+    TAREA_ACTUAL,
+    ACTUALIZAR_TAREA,
+    LIMPIAR_TAREA} from '../../types';
 
-export default (state,action)=>{
+const TareaReducer =(state,action)=>{
     switch (action.type) {
         case TAREAS_PROYECTO:
             return{
@@ -35,10 +35,11 @@ export default (state,action)=>{
                     tarea=>tarea.id!==action.payload)
           
             }
+        case ACTUALIZAR_TAREA:
         case ESTADO_TAREA:
             return{
                  ...state,
-                tareas:state.tareasproyecto.map(
+                tareas:state.tareas.map(
                 tarea=>tarea.id===action.payload.id ?
                 action.payload: tarea)
                 }
@@ -47,7 +48,13 @@ export default (state,action)=>{
                  ...state,
                  tareaseleccionada: action.payload
             }
+        case LIMPIAR_TAREA:
+            return{
+                 ...state,
+                 tareaseleccionada: null
+            }
         default:
             return state;
     }
 }
+export default TareaReducer;

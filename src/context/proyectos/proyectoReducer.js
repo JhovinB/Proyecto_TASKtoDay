@@ -5,8 +5,8 @@ import {
      VALIDAR_FORMULARIO,
      PROYECTO_ACTUAL,
      ELIMINAR_PROYECTO} from "../../types";
-
-export default (state,action)=>{
+     
+const ProyectoReducer =(state,action)=>{
     switch(action.type){
 
         case FORMULARIO_PROYECTO:
@@ -48,3 +48,4 @@ export default (state,action)=>{
     }
 
 }
+export default ProyectoReducer;

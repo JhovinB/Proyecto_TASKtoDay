@@ -7,6 +7,8 @@ import { CSSTransition,TransitionGroup } from 'react-transition-group';
 
 const ListaTareas = () => {
 
+    const validateDOM = React.useRef(null)
+
      //Extraer si un proyecto esta activo
     const proyectosContext=useContext(proyectoContext);
 
@@ -41,9 +43,8 @@ const ListaTareas = () => {
                 :
                 <TransitionGroup>
                     {tareasproyecto.map(tarea=>(
-                        <CSSTransition  
+                        <CSSTransition  nodeRef={validateDOM} in timeout={{enter:200,exit:200}} 
                             key={tarea.id}
-                            timeout={200}
                             classNames="tarea">
                         <Tarea
                             tarea={tarea}
